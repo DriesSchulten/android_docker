@@ -15,7 +15,7 @@ env:
     - REPO=driesschulten/android
 
 install:
-  - docker build -t $REPO:$COMMIT .
+  - docker build -t $REPO .
 
 script: echo 'no tests!'
 
