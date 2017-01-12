@@ -1,12 +1,26 @@
+language: python
+
+python:
+  - 2.7
+
 sudo: required
 
 services:
   - docker
 
-before_install:
-  - docker build -t driesschulten/android .
+env:
+  global:
+    - secure: "HiTY7hDM++L7wPeRUob6FJYVywMiBWpYHXnRqItFsNw+g5ruxEeY+Pqm79VekUKp3oXcsVxYcrmUG4K+NsrcwmiYYJQEDxkhtVmYB78zdjzqIbsiT48nvERva5S6sTatM+hXihyNnUjn5Fc2rtUBWOkTAo+YVk3vHL4aqRIyhGNFEqKO9UJZr4vmHvIo2RAV04O1oX4ylVxe9vLBM9KcJPXPCAZwYUBPEWfobEk6v1iJQZik5cJFPGo7mf9I7XFY18PmPs1CV92I44BfKln7wJljLWYmRR2qBj5iEkA0UBqNmfjrN0hwi9F0AkQoyXhPRksKBBtVqfzrPxV9f+UtXDLFOOGtDN2xgKYQUGpz2qHG/lU1JkDNxx3wkCbnEtmcCgpL2iy1Ebm5mqIHTrbzu95ybyJbu9MTa1cqnBrly5UGgVZb/UjY1fh5d2uIuvEpCACUlNH9hJHAtRpsCzAMGRzRvTO81Wp4y60ZTMFzH7kvXsfaE50kit3Tlx2b8SY+WtwZp35nCcdk06lIipKtuDE1VpxkYvQAp9IGy65BhAWiG+xh6bIxyhRldurgORbJkkaWXAfDacuLLZ7d7FoAh1oXViqU4gGrl07BzSGBYfb4WO93bin9wVL1qXAIdR5HNaSJ6DSCStAse55qCxUwosXlNEgxqzbdG/GcJbXKPn4="
+    - secure: "pjkbUse9Z9pYUM25gDZyfdPGXXELMQ3qr9w/TjZHdY9lXN1QJUs5UXPLW8YuYMff2+xj7teE0ln01Y/fQzzVi+G051Th7S3hNHF/ace2leSG68GKxgctXQezVohE7qxNS5i3Y6PKOnI09tdgJkCtV3h3bLJsuXVdJ12Lpg3yePkgTocSbsEJrs9r5k2VhOR7mwyCVa7wB8crDQr65n4ysKK67UikM7gaWVwrrgPjm3SuCeoRaNrN+4zP6VNj9NORTovOxMaD6rQih1uSYZ1VR/XvTCiPG0Kg+ao/ksSQ/T/2xWgtxGYYEbqxFyrDKwE0Z9A1dr6z7vDtH08ZwCjCjPD0xr8NDnbwBKVR6Bb1QHSu4eQc2Ru1c6Bajcv4roSvSt1DlzyCtQDvFeTPUoDDgWwcGvjRz7DEIv0k49pkeINYpkLvSqbqOBaPv76ovLCClLVJVN+6pQseChUTGhGvb2QkigFZP/NImYEYblGRjRFFAcTqBayo2wfDo0uNjB6h2wVBxfjqRBVt3z7sBsTc9FRM4upg8Jwzd02LYUIP64hATS1SrWJR9TrHpZEXMH3SiSOm6LVBJ1eLR/I7N8MADmedxZHepR8hRh9v8pEZLDeOUymMEXd+XO5DLbx6lC5xNvCi9geUkgIbwBmVtJmnGkINWf3DE1n0/zpckZNB1uE="
+    - COMMIT=${TRAVIS_COMMIT::8}
+    - REPO=driesschulten/android
+
+install:
+  - docker build -t $REPO:$COMMIT .
 
 after_success:
   - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-  - docker push driesschulten/android
-
+  - export REPO=driesschulten/android
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $REPO
