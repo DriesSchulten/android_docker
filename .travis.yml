@@ -22,7 +22,5 @@ script: echo 'no tests!'
 after_success:
   - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
   - docker tag $REPO $REPO:latest
-  - if [[ $TRAVIS_TAG ]]; then
-    docker tag $REPO $REPO:$TRAVIS_TAG
-    fi
+  - if [[ $TRAVIS_TAG ]]; then docker tag $REPO $REPO:$TRAVIS_TAG; fi
   - docker push $REPO
