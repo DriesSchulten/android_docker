@@ -20,8 +20,7 @@ install:
 script: echo 'no tests!'
 
 after_success:
-  - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-  - export REPO=driesschulten/android
+  - docker login -u=driesschulten -e="$DOCKER_USER" -p="$DOCKER_PASS"
   - docker tag $REPO $REPO:latest
   - if [[ $TRAVIS_TAG ]] docker tag $REPO $REPO:$TRAVIS_TAG fi
   - docker push $REPO
