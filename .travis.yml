@@ -18,6 +18,8 @@ env:
 install:
   - docker build -t $REPO:$COMMIT .
 
+script: echo "empty"
+
 after_success:
   - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
   - export REPO=driesschulten/android
