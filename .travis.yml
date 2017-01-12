@@ -10,7 +10,7 @@ services:
 
 env:
   global:
-    - secure: "tONSc8oligyyivgY2cuKw85EN9pH6Zb3Je3ab4FrlDjCKEZSd8MzSPZBIjxbBahmvya6TLhtHvEDka+qDl9qW+pnzIfd3s8GuX/TPL/7lmnKbuGteryPRBauPhnyExQ3caClgMQZF5xYyojd7c6kBlOfQdHxDsIBofjiHLscfjDzIY0wNp4lrWjDKBgmFYUtgHbX4bQSSVqcQnlW3fY9EcS/vkMjny+Se60aOH5jUv3zPEROdeiPKf8O9ubERGPBcK85+vMVFaVJVMrI+a1b7+fSjfko9yixNoRNniuQ5rF/VqTchOmkhpTjl33XqbTEd0cNUoahKdFRygCibPitEf29VnP83T7noR/izaEXu8NHlUw3/Aor+Zm1OYRP8ytgqEWpteIryubbVAPl4zYgefH2Kwkn8nQw+8Y0M+8uXMWBCgBf7AzpZOTpGT/utHRWaqUg+qt5/NDjthsTQyN64k+S6k492sw4RZvyNuHEb2GTshiIO31P/S0/H1nn2+LHxZbiF8qcyqEhWwQOSwFfHgN5flKWG+4FR3N5ehN893dfdmUwR0g7OHSwFRAAYmvJBEO+gOAEkuEhNiNIUDqlVRyhM0ZeiVKrmyZTS3JJ+HhayzgKCPlIApkqj0puxBqvYLBfMHZsyR0dl2wZLDvzr5YQ8ItMVn7plZ8at1sanNw="
+    - secure: "pI4DXVcBvPoGEpBZamkITnSuOrSMXEVwXsavHmewOm+OL9SdtD+x94rcLbFaTKgDOWhP+BvRil6D3XC9TKpEKVFkcGPcig4we52MR4EpONAJ8j4KZhpfo+LQXCTHPaljtxSPue5xpdbyoKcr4e0xB56YUuQr4DaOTyZoyUpvOClZvx3qEJLijnoDWm5VHNLlTzyy4wv4RI/ca3E+63zognXyh8AD4lgeiMaFGWnTwrNGzCHoD8UeQiFLKHWIZPcdYJ9wvdkUGMzGoMWLkLJKgc89ihw/fiGpvwmNH+tfoSrDRPJrfhAFfihcjw2IvVSq0l1UYfPhUWCkMpDjpBBLjAmK1PwCWb6T8gSPjJdMUeZoT1rdztjoy2RPc4e8O/EdQldTFnkOElCUCpZrVHGcoAkW3Fhp8QNrRa7zV+R1GNm09l3oMGFG8fRcOuPj2egERQU89wU4TDg422mPTYxZMxtp/qrZqWZHzf9JM7blynNRuxk15zoq4ra1SSB96GlBB9bJpl0tyl07Wg6gzlLhoab1Uaw0/e3fQ/b9nRsUJHLIZzHTv1BQNS9jicEcp5e0aUAqwTWo5BvloiLgjl5aoQI5wRYiz4/1CimREaoQCXCoeOoHJa9R2Pep+N0IeezQx5sVkDQWV8uvA8C3sJAfx9fnjZAHNSeAM2bbE/tFE5k="
     - secure: "dKyOgX+h3jvIsaZ/1Eke0DFHkmXvPLFxqria0FNU1Anj9ocdXfDbvbpTCV8eOGnRAMRFr91QS/Mry/QlwP8ex0G0xUrUtRrNWthIA2HkBAqCAWgyg2Pt58KTPB4+ZaRj2dIpd18MukrmPVzam+3iO3A3f5iQFyZ1cwdTcYieQbkUdn0NoUT2K+FRFwLeMY3JYUw5vrTxyV0RQKSuhFt59EKPum1SEUuCoDtSsNDG3HBoUSjEPzWkl+Qfmy5IYt7VoqZPhyP1OZZb6TLf2QvCfYWXpMFi4cIC5icci7P4/Q0Y0GPmhfeLFOb2J837xt1mh3heUCjRAaUexDKcmS4Xr73obht1sXftocxNRFZR99wwhrLOzeooQLYDoLkY7DMeAjbDs1Y5HP/pjmLOvVFWQZxyXaT9fpGGn1QvgxXU4Tr7Xu3l74xheOUNFUnOZd+Xy4nd0e5CMf7qgfXcl3Wb8x7Tq5cVmZdtMJ/Lt4N6AuJpfx3zPBJZO4xF1KpuovTdEOk7OUWpZVp2TzoT9B2Wugj3nhQdXEfh1BbFMv+uGGdIxuzp2839rTz814+cXBt5Kvq3gPmzs6F6SstPXqCIA4nmzhRti79SBIfsNkaF4WgPPimvpVYTvfYfi4wjtdVDra9od+TOFfiP1qQcZQzuzXovJ2xlOUakaUesE/P8kZ4="
     - REPO=driesschulten/android
 
@@ -20,9 +20,9 @@ install:
 script: echo 'no tests!'
 
 after_success:
-  - docker login -u=driesschulten -e="$DOCKER_USER" -p="$DOCKER_PASS"
+  - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
   - docker tag $REPO $REPO:latest
-  - if [[ $TRAVIS_TAG ]]; then 
+  - if [[ $TRAVIS_TAG ]]; then
     docker tag $REPO $REPO:$TRAVIS_TAG
     fi
   - docker push $REPO
