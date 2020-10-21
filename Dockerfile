@@ -17,7 +17,7 @@ ENV ANDROID_HOME ${SDK_HOME}/android-sdk-linux
 ENV ANDROID_SDK ${SDK_HOME}/android-sdk-linux
 ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
-ENV ANDROID_COMPONENTS platform-tools,build-tools-28.0.3,android-28
+ENV ANDROID_COMPONENTS platform-tools,build-tools-30.0.2,android-28
 ENV GOOGLE_COMPONENTS extra-android-m2repository,extra-google-m2repository
 
 RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_COMPONENTS}" ; \
